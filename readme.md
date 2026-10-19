@@ -24,6 +24,15 @@ python train_classifier.py --pretrained_model_path vit-t-mae.pt --output_model_p
 
 See logs by `tensorboard --logdir logs`.
 
+### Resume & custom paths
+Both scripts save a resumable checkpoint (model / optimizer / scheduler / epoch / RNG state) every epoch, written atomically.
+```bash
+# data, logs and weights can live anywhere, e.g. Google Drive on Colab
+python mae_pretrain.py --data_dir /content/drive/MyDrive/MAE/data \
+    --log_dir /content/drive/MyDrive/MAE/logs --output_dir /content/drive/MyDrive/MAE/ckpt --resume
+```
+`--resume` continues from `<output_dir>/mae-ckpt.pt` (or `<output_model_path stem>-ckpt.pt` for the classifier) and starts from scratch if none exists.
+
 ### Result
 |Model|Validation Acc|
 |-----|--------------|
